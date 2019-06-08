@@ -47,6 +47,8 @@ class Clause:
         """
         all_symbols = sorted(self.positive + self.negative)
 
+        #all_symbols = self.positive + self.negative
+
         print("[", end='')
         if len(all_symbols) == 0:
             print("]=FALSE", end="")
@@ -100,6 +102,7 @@ def find_index_of_clause(clause, clause_set):
     :param clause_set: The clause set to search in
     :return: Either the index of the clause set or False if the clause is not in the clause set
     """
+    #clause = empty_clause
     for element in clause_set:
         if clause.equals(element):
             return clause_set.index(element)
@@ -175,7 +178,6 @@ def resolve_clauses(clause1, clause2):
     # We do the same for the positives of clause 2.
     positive1 = set(clause1.positive) - set(clause1.positive).intersection(set(clause2.negative))
     positive2 = set(clause2.positive) - set(clause2.positive).intersection(set(clause1.negative))
-    # We take the union of positive1 and positive2 to get the (unique) positive symbols of the resolvent
     resolvent.positive = sorted(list(positive1.union(positive2)))
     #We repeat the above to get the negated symbols of the resolvent
     negative1 = set(clause1.negative) - set(clause1.negative).intersection(set(clause2.positive))
@@ -213,6 +215,7 @@ def resolution(kb):
                 # Only apply resolution when there's at least one negation in one set of a symbol in the other set
                 if can_resolve(kb[i], kb[j]):
                     resolvent = resolve_clauses(kb[i], kb[j])
+
                     inferred.append(resolvent)
 
         # If the set of inferred clauses is a subset of the knowledge base (i.e. all clauses are already in the kb),
@@ -243,14 +246,33 @@ def init():
 # It should not be necessary to change any code above this line!
 ##
 
-def recursive_print_proof(idx, clause_set):
-    print("Implement the function recursive_print_proof() yourself!")
+
+def recursive_print_proof(idx, clause_set, proof_clause):
+    counter=0
+    resolvent = Clause("")
+    while counter <=idx:
+        for i in range(counter + 1, idx):
+            if can_resolve(clause_set[counter], clause_set[i]):
+                resolvent =resolve_clauses(clause_set[counter], clause_set[i])
+
+            if proof_clause.equals(resolvent):
+                proof_clause = clause_set[i]
+                recursive_print_proof(idx, clause_set, proof_clause)
+                resolvent.print_clause()
+                print(" is inferred by ", end='')
+                clause_set[counter].print_clause()
+                print(" and ", end='')
+                clause_set[i].print_clause()
+                print("")
+                return
+        counter += 1
+
 
 def print_proof(clause_set):
     empty_clause = Clause("")
 
     idx = find_index_of_clause(empty_clause, clause_set)
-    recursive_print_proof(idx, clause_set)
+    recursive_print_proof(idx, clause_set, empty_clause)
 
 
 def main():
@@ -260,7 +282,7 @@ def main():
     print_clause_set(kb)
 
     kb = resolution(kb)
-
+    print(kb[3])
     print("KB after resolution=", end='')
     print_clause_set(kb)
 
