@@ -229,9 +229,6 @@ def resolution(kb):
     return kb
 
 def init():
-    """
-    Makes an example hardcoded KB with clauses {~a,~b}, {a,~b,~c,~d}, {b,~d}, {c,~d}
-    """
     read_clause_set=0
     kb = []
 

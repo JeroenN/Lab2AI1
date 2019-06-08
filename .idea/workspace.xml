@@ -25,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/resolution.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="396">
-              <caret line="284" lean-forward="true" selection-start-line="284" selection-end-line="284" />
+              <caret line="241" lean-forward="true" selection-start-line="241" selection-end-line="241" />
             </state>
           </provider>
         </entry>
@@ -121,7 +121,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12622951" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28579235" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
@@ -150,7 +150,7 @@
     <entry file="file://$PROJECT_DIR$/resolution.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
-          <caret line="284" lean-forward="true" selection-start-line="284" selection-end-line="284" />
+          <caret line="241" lean-forward="true" selection-start-line="241" selection-end-line="241" />
         </state>
       </provider>
     </entry>
