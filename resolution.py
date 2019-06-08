@@ -232,13 +232,22 @@ def init():
     """
     Makes an example hardcoded KB with clauses {~a,~b}, {a,~b,~c,~d}, {b,~d}, {c,~d}
     """
+    read_clause_set=0
     kb = []
 
-    kb.append(Clause("~a,~b"))
-    kb.append(Clause("a,~b,~c,~d"))
-    kb.append(Clause("b,~d"))
-    kb.append(Clause("c,~d"))
-    kb.append(Clause("d"))
+    string = input()
+    newString = ""
+    for i in range(0, len(string)):
+        if string[i]=="]" and newString!="":
+            read_clause_set=0
+            kb.append(Clause(newString))
+            newString=""
+
+        if read_clause_set==1 and string[i]!="[":
+            newString += string[i]
+
+        if string[i]=="[":
+            read_clause_set=1
 
     return kb
 
@@ -282,7 +291,6 @@ def main():
     print_clause_set(kb)
 
     kb = resolution(kb)
-    print(kb[3])
     print("KB after resolution=", end='')
     print_clause_set(kb)
 
